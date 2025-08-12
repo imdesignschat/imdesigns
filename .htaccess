@@ -1,0 +1,11 @@
+
+# Enable mod_rewrite (ensure it's enabled in your Apache setup)
+RewriteEngine On
+
+# Redirect mobile devices
+RewriteCond %{HTTP_USER_AGENT} "(Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone)" [NC]
+RewriteRule ^(.*)$ /mobile/$1 [L]
+
+# Redirect desktop devices
+RewriteCond %{HTTP_USER_AGENT} "(Windows NT|Macintosh|Linux x86_64|X11|Ubuntu|Fedora)" [NC]
+RewriteRule ^(.*)$ /desktop/$1 [L]

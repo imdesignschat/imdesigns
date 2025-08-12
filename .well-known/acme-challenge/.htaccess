@@ -1,0 +1,16 @@
+# Disable RewriteEngine if not needed
+<IfModule mod_rewrite.c>
+    RewriteEngine Off
+</IfModule>
+
+# Allow access to all files, especially for Let's Encrypt validation
+<Directory "/var/www/vhosts/imdesigns.in/httpdocs/.well-known/">
+    Require all granted
+</Directory>
+
+# Deny access to hidden files (e.g., .htaccess, .git, etc.), except .well-known
+<FilesMatch "^\.">
+    <If "%{REQUEST_URI} !~ m#^/\.well-known/#">
+        Require all denied
+    </If>
+</FilesMatch>
